@@ -1,0 +1,1912 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Un jardín para ti 🌻</title>
+
+<style>
+
+/* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+
+    background: linear-gradient(
+        to bottom,
+        #87ceeb 0%,
+        #bdefff 45%,
+        #ffd98e 75%,
+        #f4b860 100%
+    );
+
+    transition: background 4s ease;
+}
+
+.escena {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/* =========================
+   SOL
+========================= */
+
+.sol {
+    position: absolute;
+
+    width: 130px;
+    height: 130px;
+
+    border-radius: 50%;
+
+    background: #ffd83d;
+
+    top: 55px;
+    right: 90px;
+
+    box-shadow:
+        0 0 30px #ffe878,
+        0 0 70px #ffe878,
+        0 0 110px rgba(255, 216, 61, .5);
+
+    animation: respirarSol 4s infinite alternate;
+
+    transition: all 4s ease;
+}
+
+@keyframes respirarSol {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+
+}
+
+
+/* =========================
+   NUBES
+========================= */
+
+.nube {
+    position: absolute;
+
+    width: 140px;
+    height: 45px;
+
+    background: white;
+
+    border-radius: 50px;
+
+    opacity: .75;
+
+    animation: nubeMover 30s linear infinite;
+}
+
+.nube::before,
+.nube::after {
+
+    content: "";
+
+    position: absolute;
+
+    background: white;
+
+    border-radius: 50%;
+}
+
+.nube::before {
+
+    width: 65px;
+    height: 65px;
+
+    left: 25px;
+    bottom: 5px;
+}
+
+.nube::after {
+
+    width: 50px;
+    height: 50px;
+
+    right: 25px;
+    bottom: 0;
+}
+
+.nube1 {
+
+    top: 90px;
+    left: -180px;
+}
+
+.nube2 {
+
+    top: 190px;
+    left: -300px;
+
+    transform: scale(.75);
+
+    animation-delay: 10s;
+}
+
+@keyframes nubeMover {
+
+    from {
+        transform: translateX(-200px);
+    }
+
+    to {
+        transform: translateX(calc(100vw + 400px));
+    }
+
+}
+
+
+/* =========================
+   TITULO
+========================= */
+
+.contenido {
+
+    position: absolute;
+
+    top: 25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    text-align: center;
+
+    width: 90%;
+
+    z-index: 10;
+}
+
+h1 {
+
+    color: white;
+
+    font-size: clamp(32px, 6vw, 60px);
+
+    text-shadow:
+        0 3px 8px rgba(0,0,0,.35);
+
+    animation: aparecer 2s ease;
+}
+
+.subtitulo {
+
+    margin-top: 8px;
+
+    color: white;
+
+    font-size: clamp(16px, 3vw, 22px);
+
+    text-shadow:
+        0 2px 5px rgba(0,0,0,.3);
+}
+
+@keyframes aparecer {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-30px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* =========================
+   MUSICA
+========================= */
+
+.musica-container {
+
+    position: absolute;
+
+    top: 135px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 100%;
+
+    text-align: center;
+
+    z-index: 20;
+}
+
+.musica-btn {
+
+    border: none;
+
+    padding: 13px 25px;
+
+    border-radius: 40px;
+
+    background: rgba(255,255,255,.95);
+
+    color: #8a5a00;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.2);
+
+    transition: .3s;
+}
+
+.musica-btn:hover {
+
+    transform: scale(1.08);
+
+    background: white;
+
+}
+
+.musica-btn:active {
+
+    transform: scale(.96);
+
+}
+
+.estado-musica {
+
+    color: white;
+
+    margin-top: 10px;
+
+    font-size: 14px;
+
+    min-height: 20px;
+
+    text-shadow:
+        0 2px 5px rgba(0,0,0,.5);
+}
+
+
+/* =========================
+   CONTADOR
+========================= */
+
+.contador {
+
+    position: absolute;
+
+    top: 225px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: white;
+
+    font-size: 15px;
+
+    text-shadow:
+        0 2px 4px rgba(0,0,0,.5);
+
+    z-index: 20;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   SUELO
+========================= */
+
+.suelo {
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 100%;
+
+    height: 230px;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 30%,
+            #6e9f35 0 3px,
+            transparent 4px
+        ),
+
+        radial-gradient(
+            circle at 60% 70%,
+            #6e9f35 0 3px,
+            transparent 4px
+        ),
+
+        linear-gradient(
+            to bottom,
+            #77b33a,
+            #4f8a29
+        );
+
+    z-index: 1;
+}
+
+
+/* =========================
+   JARDIN
+========================= */
+
+.jardin {
+
+    position: absolute;
+
+    bottom: 120px;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 400px;
+
+    z-index: 5;
+}
+
+
+/* =========================
+   FLORES
+========================= */
+
+.flor {
+
+    position: absolute;
+
+    width: 120px;
+
+    height: 260px;
+
+    cursor: pointer;
+
+    transform-origin: bottom center;
+
+    animation:
+        balanceo 4s ease-in-out infinite;
+
+    transition:
+        transform .4s ease;
+}
+
+.flor:hover {
+
+    transform: scale(1.08);
+}
+
+
+/* POSICIONES */
+
+.flor1 {
+
+    left: 8%;
+
+    bottom: 10px;
+
+    animation-delay: 0s;
+}
+
+.flor2 {
+
+    left: 28%;
+
+    bottom: 20px;
+
+    animation-delay: .7s;
+}
+
+.flor3 {
+
+    left: 48%;
+
+    bottom: 0;
+
+    animation-delay: 1.3s;
+}
+
+.flor4 {
+
+    left: 68%;
+
+    bottom: 25px;
+
+    animation-delay: 2s;
+}
+
+.flor5 {
+
+    left: 86%;
+
+    bottom: 5px;
+
+    animation-delay: 1s;
+}
+
+@keyframes balanceo {
+
+    0%,100% {
+
+        transform:
+            rotate(-2deg);
+    }
+
+    50% {
+
+        transform:
+            rotate(3deg);
+    }
+
+}
+
+
+/* =========================
+   TALLO
+========================= */
+
+.tallo {
+
+    position: absolute;
+
+    width: 9px;
+
+    height: 190px;
+
+    background: #3f7d28;
+
+    bottom: 0;
+
+    left: 55px;
+
+    border-radius: 10px;
+}
+
+
+/* =========================
+   HOJAS
+========================= */
+
+.hoja {
+
+    position: absolute;
+
+    width: 55px;
+
+    height: 25px;
+
+    background: #4e982f;
+
+    border-radius:
+        100% 0 100% 0;
+}
+
+.hoja1 {
+
+    bottom: 85px;
+
+    left: 10px;
+
+    transform:
+        rotate(25deg);
+}
+
+.hoja2 {
+
+    bottom: 120px;
+
+    right: 5px;
+
+    transform:
+        rotate(-25deg);
+}
+
+
+/* =========================
+   PETALOS
+========================= */
+
+.cent ro-flor {
+    position: absolute;
+}
+
+.centro-flor {
+
+    position: absolute;
+
+    width: 45px;
+
+    height: 45px;
+
+    background: #6e4200;
+
+    border-radius: 50%;
+
+    left: 38px;
+
+    top: 15px;
+
+    z-index: 3;
+
+    box-shadow:
+        inset 0 0 0 5px #8d5600;
+}
+
+.petalo {
+
+    position: absolute;
+
+    width: 50px;
+
+    height: 80px;
+
+    background: #ffd21c;
+
+    border-radius: 50%;
+
+    left: 35px;
+
+    top: -5px;
+
+    transform-origin:
+        center 65px;
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,.15);
+}
+
+.p1 {
+    transform:
+        rotate(0deg)
+        translateY(-28px);
+}
+
+.p2 {
+    transform:
+        rotate(45deg)
+        translateY(-28px);
+}
+
+.p3 {
+    transform:
+        rotate(90deg)
+        translateY(-28px);
+}
+
+.p4 {
+    transform:
+        rotate(135deg)
+        translateY(-28px);
+}
+
+.p5 {
+    transform:
+        rotate(180deg)
+        translateY(-28px);
+}
+
+.p6 {
+    transform:
+        rotate(225deg)
+        translateY(-28px);
+}
+
+.p7 {
+    transform:
+        rotate(270deg)
+        translateY(-28px);
+}
+
+.p8 {
+    transform:
+        rotate(315deg)
+        translateY(-28px);
+}
+
+
+/* =========================
+   MENSAJE
+========================= */
+
+.mensaje {
+
+    position: absolute;
+
+    bottom: 28px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width:
+        min(650px, 90%);
+
+    padding:
+        18px 24px;
+
+    background:
+        rgba(255,255,255,.93);
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    color: #6d4800;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.2);
+
+    z-index: 30;
+
+    transition:
+        opacity .4s,
+        transform .4s;
+}
+
+
+/* =========================
+   MARIPOSAS
+========================= */
+
+.mariposa {
+
+    position: absolute;
+
+    font-size: 30px;
+
+    z-index: 8;
+
+    animation:
+        volar 15s linear infinite;
+}
+
+.mariposa1 {
+
+    top: 35%;
+
+    left: -50px;
+}
+
+.mariposa2 {
+
+    top: 50%;
+
+    left: -80px;
+
+    animation-delay: 5s;
+}
+
+.mariposa3 {
+
+    top: 28%;
+
+    left: -100px;
+
+    animation-delay: 9s;
+}
+
+@keyframes volar {
+
+    0% {
+
+        transform:
+            translateX(-100px)
+            translateY(0)
+            rotate(0deg);
+    }
+
+    25% {
+
+        transform:
+            translateX(30vw)
+            translateY(-80px)
+            rotate(10deg);
+    }
+
+    50% {
+
+        transform:
+            translateX(60vw)
+            translateY(40px)
+            rotate(-10deg);
+    }
+
+    75% {
+
+        transform:
+            translateX(90vw)
+            translateY(-50px)
+            rotate(10deg);
+    }
+
+    100% {
+
+        transform:
+            translateX(110vw)
+            translateY(0)
+            rotate(0deg);
+    }
+
+}
+
+
+/* =========================
+   CORAZONES
+========================= */
+
+.corazon {
+
+    position: absolute;
+
+    font-size: 22px;
+
+    pointer-events: none;
+
+    z-index: 50;
+
+    animation:
+        subirCorazon 4s linear forwards;
+}
+
+@keyframes subirCorazon {
+
+    0% {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(.5);
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-300px)
+            scale(1.5);
+    }
+
+}
+
+
+/* =========================
+   BRILLOS
+========================= */
+
+.brillo {
+
+    position: absolute;
+
+    color: white;
+
+    font-size: 20px;
+
+    animation:
+        brillo 2s infinite alternate;
+
+    z-index: 4;
+}
+
+@keyframes brillo {
+
+    from {
+
+        opacity: .2;
+
+        transform:
+            scale(.7);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1.3);
+    }
+
+}
+
+.b1 {
+
+    top: 25%;
+    left: 20%;
+}
+
+.b2 {
+
+    top: 35%;
+    left: 45%;
+
+    animation-delay: .5s;
+}
+
+.b3 {
+
+    top: 20%;
+    left: 70%;
+
+    animation-delay: 1s;
+}
+
+.b4 {
+
+    top: 55%;
+    left: 15%;
+
+    animation-delay: 1.5s;
+}
+
+.b5 {
+
+    top: 45%;
+    left: 82%;
+
+    animation-delay: .8s;
+}
+
+
+/* =========================
+   SORPRESA FINAL
+========================= */
+
+.sorpresa {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(255,193,7,.88);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    z-index: 100;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: 1s;
+}
+
+.sorpresa.activa {
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.sorpresa-contenido {
+
+    background:
+        rgba(255,255,255,.96);
+
+    width:
+        min(600px, 90%);
+
+    padding:
+        45px 30px;
+
+    border-radius: 35px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.3);
+
+    animation:
+        aparecerSorpresa 1s ease;
+}
+
+.sorpresa h2 {
+
+    font-size: 40px;
+
+    color: #d08a00;
+
+    margin-bottom: 20px;
+}
+
+.sorpresa p {
+
+    font-size: 21px;
+
+    line-height: 1.7;
+
+    color: #6d4800;
+}
+
+.cerrar {
+
+    margin-top: 25px;
+
+    border: none;
+
+    padding:
+        12px 25px;
+
+    border-radius: 30px;
+
+    background:
+        #f2b400;
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.cerrar:hover {
+
+    transform:
+        scale(1.08);
+}
+
+@keyframes aparecerSorpresa {
+
+    from {
+
+        transform:
+            scale(.6);
+
+        opacity: 0;
+    }
+
+    to {
+
+        transform:
+            scale(1);
+
+        opacity: 1;
+    }
+
+}
+
+
+/* =========================
+   MOVIL
+========================= */
+
+@media(max-width: 700px) {
+
+    .sol {
+
+        width: 85px;
+        height: 85px;
+
+        right: 30px;
+        top: 45px;
+    }
+
+    .contenido {
+
+        top: 18px;
+    }
+
+    .musica-container {
+
+        top: 120px;
+    }
+
+    .contador {
+
+        top: 210px;
+    }
+
+    .jardin {
+
+        bottom: 100px;
+
+        transform:
+            scale(.78);
+
+        transform-origin:
+            bottom center;
+    }
+
+    .flor1 {
+        left: 0;
+    }
+
+    .flor2 {
+        left: 23%;
+    }
+
+    .flor3 {
+        left: 45%;
+    }
+
+    .flor4 {
+        left: 67%;
+    }
+
+    .flor5 {
+        left: 86%;
+    }
+
+    .mensaje {
+
+        bottom: 15px;
+
+        font-size: 15px;
+
+        padding: 14px;
+    }
+
+    .suelo {
+
+        height: 170px;
+    }
+
+    .sorpresa h2 {
+
+        font-size: 30px;
+    }
+
+    .sorpresa p {
+
+        font-size: 17px;
+    }
+
+}
+
+
+/* =========================
+   PANTALLAS MUY PEQUEÑAS
+========================= */
+
+@media(max-width: 450px) {
+
+    h1 {
+
+        font-size: 30px;
+    }
+
+    .subtitulo {
+
+        font-size: 15px;
+    }
+
+    .musica-container {
+
+        top: 115px;
+    }
+
+    .contador {
+
+        top: 205px;
+
+        font-size: 13px;
+    }
+
+    .jardin {
+
+        transform:
+            scale(.68);
+    }
+
+    .flor5 {
+
+        display: none;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="escena">
+
+
+    <!-- =========================
+         SOL
+    ========================== -->
+
+    <div class="sol"></div>
+
+
+    <!-- =========================
+         NUBES
+    ========================== -->
+
+    <div class="nube nube1"></div>
+
+    <div class="nube nube2"></div>
+
+
+    <!-- =========================
+         MARIPOSAS
+    ========================== -->
+
+    <div class="mariposa mariposa1">
+        🦋
+    </div>
+
+    <div class="mariposa mariposa2">
+        🦋
+    </div>
+
+    <div class="mariposa mariposa3">
+        🦋
+    </div>
+
+
+    <!-- =========================
+         BRILLOS
+    ========================== -->
+
+    <div class="brillo b1">
+        ✦
+    </div>
+
+    <div class="brillo b2">
+        ✧
+    </div>
+
+    <div class="brillo b3">
+        ✦
+    </div>
+
+    <div class="brillo b4">
+        ✧
+    </div>
+
+    <div class="brillo b5">
+        ✦
+    </div>
+
+
+    <!-- =========================
+         TITULO
+    ========================== -->
+
+    <div class="contenido">
+
+        <h1>
+            🌻 Un jardín para ti 🌻
+        </h1>
+
+        <p class="subtitulo">
+            Porque algunas personas merecen recibir flores,
+            aunque estén lejos ❤️
+        </p>
+
+    </div>
+
+
+    <!-- =========================
+         MUSICA
+    ========================== -->
+
+    <div class="musica-container">
+
+        <button
+            id="botonMusica"
+            class="musica-btn">
+
+            🎵 Escuchar música
+
+        </button>
+
+        <audio id="musica" loop preload="auto">
+    <source src="./musica.mp3.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+</audio>
+
+        <div
+            id="estadoMusica"
+            class="estado-musica">
+
+            Pulsa el botón para comenzar 🎶
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         CONTADOR
+    ========================== -->
+
+    <div
+        id="contador"
+        class="contador">
+
+        Flores descubiertas: 0 de 5
+
+    </div>
+
+
+    <!-- =========================
+         JARDIN
+    ========================== -->
+
+    <div class="jardin">
+
+
+        <!-- FLOR 1 -->
+
+        <div
+            class="flor flor1"
+            data-mensaje="🌻 Esta flor es para recordarte que, incluso cuando no puedas verme, siempre hay alguien pensando en ti. 💛">
+
+            <div class="petalo p1"></div>
+            <div class="petalo p2"></div>
+            <div class="petalo p3"></div>
+            <div class="petalo p4"></div>
+            <div class="petalo p5"></div>
+            <div class="petalo p6"></div>
+            <div class="petalo p7"></div>
+            <div class="petalo p8"></div>
+
+            <div class="centro-flor"></div>
+
+            <div class="tallo"></div>
+
+            <div class="hoja hoja1"></div>
+            <div class="hoja hoja2"></div>
+
+        </div>
+
+
+        <!-- FLOR 2 -->
+
+        <div
+            class="flor flor2"
+            data-mensaje="💛 Ojalá pudiera entregarte estas flores en persona, pero mientras tanto quiero que esta pequeña pantalla te recuerde a mí. 🌻">
+
+            <div class="petalo p1"></div>
+            <div class="petalo p2"></div>
+            <div class="petalo p3"></div>
+            <div class="petalo p4"></div>
+            <div class="petalo p5"></div>
+            <div class="petalo p6"></div>
+            <div class="petalo p7"></div>
+            <div class="petalo p8"></div>
+
+            <div class="centro-flor"></div>
+
+            <div class="tallo"></div>
+
+            <div class="hoja hoja1"></div>
+            <div class="hoja hoja2"></div>
+
+        </div>
+
+
+        <!-- FLOR 3 -->
+
+        <div
+            class="flor flor3"
+            data-mensaje="🌻 No importa la distancia, siempre habrá un lugar para ti en mis pensamientos. 🥹🌻”>
+
+            <div class="petalo p1"></div>
+            <div class="petalo p2"></div>
+            <div class="petalo p3"></div>
+            <div class="petalo p4"></div>
+            <div class="petalo p5"></div>
+            <div class="petalo p6"></div>
+            <div class="petalo p7"></div>
+            <div class="petalo p8"></div>
+
+            <div class="centro-flor"></div>
+
+            <div class="tallo"></div>
+
+            <div class="hoja hoja1"></div>
+            <div class="hoja hoja2"></div>
+
+        </div>
+
+
+        <!-- FLOR 4 -->
+
+        <div
+            class="flor flor4"
+            data-mensaje="❤️ Y si algún día extrañas estas flores, recuerda que detrás de ellas hay alguien que te quiere muchísimo. 🌻">
+
+            <div class="petalo p1"></div>
+            <div class="petalo p2"></div>
+            <div class="petalo p3"></div>
+            <div class="petalo p4"></div>
+            <div class="petalo p5"></div>
+            <div class="petalo p6"></div>
+            <div class="petalo p7"></div>
+            <div class="petalo p8"></div>
+
+            <div class="centro-flor"></div>
+
+            <div class="tallo"></div>
+
+            <div class="hoja hoja1"></div>
+            <div class="hoja hoja2"></div>
+
+        </div>
+
+
+        <!-- FLOR 5 -->
+
+        <div
+            class="flor flor5"
+            data-mensaje="🌻 Esta última flor guarda un deseo: que cada vez que la veas, sonrías y recuerdes lo especial que eres para mí. 💛">
+
+            <div class="petalo p1"></div>
+            <div class="petalo p2"></div>
+            <div class="petalo p3"></div>
+            <div class="petalo p4"></div>
+            <div class="petalo p5"></div>
+            <div class="petalo p6"></div>
+            <div class="petalo p7"></div>
+            <div class="petalo p8"></div>
+
+            <div class="centro-flor"></div>
+
+            <div class="tallo"></div>
+
+            <div class="hoja hoja1"></div>
+            <div class="hoja hoja2"></div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================
+         SUELO
+    ========================== -->
+
+    <div class="suelo"></div>
+
+
+    <!-- =========================
+         MENSAJE
+    ========================== -->
+
+    <div
+        id="mensaje"
+        class="mensaje">
+
+        🌻 Toca una flor para descubrir
+        un pequeño mensaje para ti ❤️
+
+    </div>
+
+
+    <!-- =========================
+         SORPRESA FINAL
+    ========================== -->
+
+    <div
+        id="sorpresa"
+        class="sorpresa">
+
+        <div class="sorpresa-contenido">
+
+            <h2>
+                🌻 Todas las flores son para ti 🌻
+            </h2>
+
+            <p>
+
+                Tal vez estas flores sean digitales,
+                pero todo lo que quiero decirte con ellas
+                es completamente real. ❤️
+
+                <br><br>
+
+                No importa cuántos kilómetros haya,
+                siempre habrá una manera de hacerte llegar
+                un poquito de mi cariño.
+
+                <br><br>
+
+                <strong>
+                    Te quiero muchísimo. 💛
+                </strong>
+
+            </p>
+
+            <button
+                class="cerrar"
+                id="cerrarSorpresa">
+
+                Seguir viendo las flores 🌻
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================
+     AUDIO
+========================= -->
+
+<audio
+    id="musica"
+    loop
+    preload="auto">
+
+    <source
+        src="./audio.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+<script>
+
+
+/* =========================
+   ELEMENTOS
+========================= */
+
+const botonMusica =
+    document.getElementById(
+        "botonMusica"
+    );
+
+const musica =
+    document.getElementById(
+        "musica"
+    );
+
+const estadoMusica =
+    document.getElementById(
+        "estadoMusica"
+    );
+
+const flores =
+    document.querySelectorAll(
+        ".flor"
+    );
+
+const mensaje =
+    document.getElementById(
+        "mensaje"
+    );
+
+const contador =
+    document.getElementById(
+        "contador"
+    );
+
+const sorpresa =
+    document.getElementById(
+        "sorpresa"
+    );
+
+const cerrarSorpresa =
+    document.getElementById(
+        "cerrarSorpresa"
+    );
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let reproduciendo = false;
+
+let descubiertas = new Set();
+
+
+/* =========================
+   MUSICA
+========================= */
+
+botonMusica.addEventListener(
+    "click",
+    function () {
+
+        if (!reproduciendo) {
+
+            musica.play()
+                .then(function () {
+
+                    reproduciendo = true;
+
+                    botonMusica.innerHTML =
+                        "⏸️ Pausar música";
+
+                    estadoMusica.innerHTML =
+                        "🎶 Reproduciendo...";
+
+                    /*
+                       CAMBIAR AMBIENTE
+                    */
+
+                    document.body.style.background =
+                        "linear-gradient(to bottom, #6f9bd1 0%, #d29bca 45%, #f2b56b 75%, #8b5e45 100%)";
+
+
+                    /*
+                       CORAZONES
+                    */
+
+                    crearCorazones();
+
+                    crearCorazones();
+
+                    crearCorazones();
+
+                })
+
+                .catch(function (error) {
+
+                    console.error(
+                        "Error de audio:",
+                        error
+                    );
+
+                    estadoMusica.innerHTML =
+                        "❌ No se pudo reproducir audio.mp3";
+
+                });
+
+        }
+
+        else {
+
+            musica.pause();
+
+            reproduciendo = false;
+
+            botonMusica.innerHTML =
+                "🎵 Escuchar música";
+
+            estadoMusica.innerHTML =
+                "Música pausada";
+
+        }
+
+    }
+);
+
+
+/* =========================
+   VERIFICAR AUDIO
+========================= */
+
+musica.addEventListener(
+    "loadeddata",
+    function () {
+
+        console.log(
+            "✅ audio.mp3 encontrado correctamente"
+        );
+
+    }
+);
+
+
+musica.addEventListener(
+    "error",
+    function () {
+
+        estadoMusica.innerHTML =
+            "❌ No se encontró audio.mp3";
+
+        console.error(
+            "No se encontró el archivo audio.mp3"
+        );
+
+    }
+);
+
+
+/* =========================
+   FLORES
+========================= */
+
+flores.forEach(
+    function (flor, indice) {
+
+        flor.addEventListener(
+            "click",
+            function () {
+
+                const texto =
+                    flor.dataset.mensaje;
+
+
+                /*
+                   OCULTAR MENSAJE
+                */
+
+                mensaje.style.opacity =
+                    "0";
+
+                mensaje.style.transform =
+                    "translateX(-50%) scale(.9)";
+
+
+                /*
+                   MOSTRAR NUEVO MENSAJE
+                */
+
+                setTimeout(
+                    function () {
+
+                        mensaje.innerHTML =
+                            texto;
+
+                        mensaje.style.opacity =
+                            "1";
+
+                        mensaje.style.transform =
+                            "translateX(-50%) scale(1)";
+
+                    },
+                    200
+                );
+
+
+                /*
+                   REGISTRAR FLOR
+                */
+
+                descubiertas.add(
+                    indice
+                );
+
+
+                contador.innerHTML =
+                    `Flores descubiertas: ${descubiertas.size} de ${flores.length}`;
+
+
+                /*
+                   CORAZONES
+                */
+
+                crearCorazones();
+
+
+                /*
+                   CRECER FLOR
+                */
+
+                flor.style.transform =
+                    "scale(1.18)";
+
+
+                setTimeout(
+                    function () {
+
+                        flor.style.transform =
+                            "";
+
+                    },
+                    600
+                );
+
+
+                /*
+                   TODAS LAS FLORES
+                */
+
+                if (
+                    descubiertas.size ===
+                    flores.length
+                ) {
+
+                    setTimeout(
+                        function () {
+
+                            mensaje.innerHTML =
+                                "🌻✨ ¡Encontraste todas las flores! ❤️";
+
+                        },
+                        3500
+                    );
+
+
+                    setTimeout(
+                        function () {
+
+                            sorpresa.classList.add(
+                                "activa"
+                            );
+
+                            crearMuchosCorazones();
+
+                        },
+                        6000
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================
+   CREAR CORAZONES
+========================= */
+
+function crearCorazones() {
+
+    const cantidad = 7;
+
+    for (
+        let i = 0;
+        i < cantidad;
+        i++
+    ) {
+
+        const corazon =
+            document.createElement(
+                "div"
+            );
+
+
+        corazon.className =
+            "corazon";
+
+
+        const opciones = [
+            "❤️",
+            "💛",
+            "🤍",
+            "💕",
+            "🌻"
+        ];
+
+
+        corazon.innerHTML =
+            opciones[
+                Math.floor(
+                    Math.random() *
+                    opciones.length
+                )
+            ];
+
+
+        corazon.style.left =
+            Math.random() *
+            100 +
+            "%";
+
+
+        corazon.style.bottom =
+            Math.random() *
+            200 +
+            "px";
+
+
+        corazon.style.animationDuration =
+            3 +
+            Math.random() *
+            3 +
+            "s";
+
+
+        document.body.appendChild(
+            corazon
+        );
+
+
+        setTimeout(
+            function () {
+
+                corazon.remove();
+
+            },
+            6000
+        );
+
+    }
+
+}
+
+
+/* =========================
+   MUCHOS CORAZONES
+========================= */
+
+function crearMuchosCorazones() {
+
+    for (
+        let i = 0;
+        i < 35;
+        i++
+    ) {
+
+        setTimeout(
+            function () {
+
+                crearCorazones();
+
+            },
+            i * 100
+        );
+
+    }
+
+}
+
+
+/* =========================
+   CERRAR SORPRESA
+========================= */
+
+cerrarSorpresa.addEventListener(
+    "click",
+    function () {
+
+        sorpresa.classList.remove(
+            "activa"
+        );
+
+    }
+);
+
+
+</script>
+
+</body>
+</html>
